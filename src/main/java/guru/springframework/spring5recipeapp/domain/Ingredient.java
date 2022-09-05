@@ -13,7 +13,7 @@ public class Ingredient
     private String description;
     private BigDecimal amount;
 
-    @OneToOne //unidirectional relationship - one way , no cascade
+    @OneToOne(fetch = FetchType.EAGER) //unidirectional relationship - one way , no cascade
     private UnitOfMeasure uom;
 
     @ManyToOne

@@ -4,6 +4,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.aspectj.weaver.ast.Not;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -19,10 +20,12 @@ public class Recipe
     private Integer servings;
     private String source;
     private String url;
+
+    @Lob
     private String directions;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "recipe")
-    private Set<Ingredient> ingredients;
+    private Set<Ingredient> ingredients = new HashSet<>();
 
     @Lob
     private byte[] image;
@@ -37,7 +40,8 @@ public class Recipe
     @JoinTable(name = "recipe_category",
                joinColumns = @JoinColumn(name = "recipe_id"), //this side
                inverseJoinColumns = @JoinColumn(name = "category_id")) //other side of rel
-    private Set<Category> categories;
+
+    private Set<Category> categories = new HashSet<>();
 
     public Long getId() {
         return id;

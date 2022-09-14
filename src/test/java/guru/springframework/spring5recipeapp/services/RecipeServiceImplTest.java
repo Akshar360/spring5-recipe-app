@@ -66,4 +66,16 @@ public class RecipeServiceImplTest {
         verify(recipeRepository,times(1)).findAll(); //verify that find all is called once and only once
         verify(recipeRepository, never()).findById(anyLong());
     }
+
+    @Test
+    public void testDeleteById() throws Exception
+    {
+        //given
+        Long idToDelete = Long.valueOf(2L);
+        recipeService.deleteById(idToDelete);
+
+         //no when part as method is void
+
+        verify(recipeRepository,times(1)).deleteById(anyLong());
+    }
 }
